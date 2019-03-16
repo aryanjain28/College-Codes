@@ -93,8 +93,7 @@ void BirthDay(int Month, int n)
 		if((User[i]->Object).Month == Month)
 		{
 			flag = 1;
-			cout << "User with ID " << User[i]->ID << " has birthday this month!\n";
-			
+			cout << "User with ID " << User[i]->ID << " has birthday this month!\n";		
 		}
 	}
 	if(flag == 0)
@@ -109,5 +108,4 @@ int main()
 
 	input(n);
 //	BirthDay(12, n);
-	max
 }
