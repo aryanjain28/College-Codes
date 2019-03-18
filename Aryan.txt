@@ -1,0 +1,3 @@
+total 4
+-rw-rw-r-- 1 aryan aryan    0 Mar 18 23:56 Aryan.txt
+drwxrwxr-x 4 aryan aryan 4096 Mar 18 23:41 SE-2
