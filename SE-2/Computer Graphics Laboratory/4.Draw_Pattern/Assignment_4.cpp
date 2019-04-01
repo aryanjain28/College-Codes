@@ -6,7 +6,7 @@
 using namespace std;
 
 void Display();
-void Reshape();
+void Initiate();
 void dda(int x1, int y1, int x2, int y2);
 
 int x1,x2,y1,y2;
@@ -24,12 +24,12 @@ int main(int a, char **c)
 	glutInitDisplayMode(GLUT_RGB);
 
 	glutCreateWindow("Assignment--1");
-	Reshape();
+	Initiate();
 	glutDisplayFunc(Display);	
 	glutMainLoop();
 }
 
-void Reshape()
+void Initiate()
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
