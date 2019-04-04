@@ -62,34 +62,32 @@ void Display()
 
 void dda(int x1, int y1, int x2, int y2)
 {
+	float xinc, yinc;
+	float steps;
 	float dx, dy;
-	int m, steps;
-	int xinc, yinc;
 
-	dx = abs(x2-x1);
-	dy = abs(y2-y1);
-
-	m = dy/dx;
-
-	if(dx >= dy)
+	dx=abs(x2-x1);
+	dy=abs(y2-y1);
+	
+	if(dx>=dy)
 		steps = dx;
 	else
 		steps = dy;
+
+	xinc = (x2-x1)/(float)steps;
+	yinc = (y2-y1)/(float)steps;
 	
-	int x = x1;
-	int y = y1;
-
-	xinc = (x2-x1)/steps;
-	yinc = (y2-y1)/steps;
-
-	for(int i=1; i<=steps; i++)
+	float x=x1;
+	float y=y1;
+	
+	for(int i=0; i<steps; i++)
 	{
-		glPointSize(2);
 		glBegin(GL_POINTS);
 		glVertex2i(x,y);
 		glEnd();
 
-		x = x + xinc;
-		y = y + yinc;
+		x=x+xinc;
+		y=y+yinc;
+
 	}
 }

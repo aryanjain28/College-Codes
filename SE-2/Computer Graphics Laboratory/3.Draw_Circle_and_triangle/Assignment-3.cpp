@@ -28,23 +28,25 @@ int main(int a, char **c)
 
 void Line(float x1, float y1, float x2, float y2)
 {
-	float dx, dy, steps, m;
 	float xinc, yinc;
-	dx = abs(x2-x1);
-	dy = abs(y2-y1);
+	float steps;
+	float dx, dy;
 
-	if(dx >= dy)
+	dx=abs(x2-x1);
+	dy=abs(y2-y1);
+	
+	if(dx>=dy)
 		steps = dx;
 	else
 		steps = dy;
 
-	xinc = (x2-x1)/steps;
-	yinc = (y2-y1)/steps;
-
+	xinc = (x2-x1)/(float)steps;
+	yinc = (y2-y1)/(float)steps;
+	
 	float x=x1;
 	float y=y1;
 	
-	for(int i=0; i<=steps; i++)
+	for(int i=0; i<steps; i++)
 	{
 		glBegin(GL_POINTS);
 		glVertex2i(x,y);
@@ -52,6 +54,7 @@ void Line(float x1, float y1, float x2, float y2)
 
 		x=x+xinc;
 		y=y+yinc;
+
 	}
 
 }
