@@ -53,7 +53,7 @@ void pqueue :: penqueue(char *name, int x)
 	}
 	else
 	{
-		front->next = p;
+		rear->next = p;
 	}
 	rear = p;
 }
