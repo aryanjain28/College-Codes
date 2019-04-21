@@ -110,8 +110,8 @@ struct tnode *prefix_tree(char *prefix)
 		}
 		else
 		{
-			T->right = s.pop();			
 			T->left = s.pop();
+			T->right = s.pop();						
 		}
 
 		s.push(T);
