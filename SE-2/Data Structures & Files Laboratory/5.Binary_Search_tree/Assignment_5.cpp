@@ -212,34 +212,30 @@ class BSTree
 		return T;
 	}
 	
-	void level_wise()
+	void level_wise(struct node *T)
 	{
-		node *t1;
-		queue q1;
-		if(root==NULL)
+		if(T==NULL)
 			return;
-		q1.enque(root);
-		cout<<"\n"<<root->data;
-		while(q1.isempty()!=1)
-		{
-			cout<<"\n";
-			queue q2;
-			while(q1.isempty()!=1)
-			{
-				t1=q1.deque();
-				if(t1->left!=NULL)
-				{
-					q2.enque(t1->left);
-					cout<<" "<<t1->left->data;
-				}
-				if(t1->right!=NULL)
-				{
-					q2.enque(t1->right);
-					cout<<" "<<t1->right->data;
-				}
-			}
 
-			q1=q2;
+		queue q;
+		q.enque(T);
+
+
+		while(q.isempty()!=1)
+		{
+			
+			struct node *temp = q.deque();
+
+			if(temp!=NULL)
+
+			if(temp->left != NULL)
+				q.enque(temp->left);
+
+			if(temp->right != NULL)
+				q.enque(temp->right);
+
+			cout << temp->data << " ";
+
 		}
 	}
 
@@ -302,7 +298,7 @@ int main()
 				t.display(root);
 				break;
 
-			case 6: t.level_wise();
+			case 6: t.level_wise(root);
 				break;
 
 			case 7: struct node* min;
