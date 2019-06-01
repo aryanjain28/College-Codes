@@ -1,156 +1,72 @@
-/*ASSIGNMENT 12- hashing (without replacement) with file handeling*/
 #include<iostream>
+#include<math.h>
+#include<GL/glut.h>
+#include<time.h>
+#include<sys/timeb.h>
 using namespace std;
-typedef struct student
+
+
+int window;
+float rtri=0.0f;
+
+
+void InitGL(int width,int height)
 {
-	int pno;
-	char name[20];
-}student;
-
-
-int size;
-void insert(student data[30],int chain[30],int flag[30],int size,student x);
-void displayH(student data[30],int chain[30],int flag[30]);
-int search(int data[30],int chain[30],int flag[30],int size,int key);
-
-int main()
-{
-	int i,ch,key;
-	
-	int chain[30],flag[30];
-	student data[30],x;
-	cout<<"\nEnter size of hash table: ";
-	cin>>size;
-	for(i=0;i<size;i++)
-			{
-				flag[i]=0;
-				chain[i]=-1;
-			}
-	do
-	{
-		cout<<"\n1. imsert\t2. display\t3. search\t4. exit\n\nEnter your choice...:";
-		cin>>ch;
-		switch(ch)
-		{
-		case 1:
-			cout<<"\nEnter phone num and name of to insert:";
-			cin>>x.pno>>x.name;
-			
-			insert(data,chain,flag,size,x);
-		break;
-		
-		case 2:
-			displayH(data,chain,flag);
-		break;
-
-		case 3:
-			int k;		
-			cout<<"\nEnter element to search...";
-			cin>>key;
-			k=search(data,chain,flag,size,key);
-			if(k==-1)
-			{
-				cout<<"\nELement not found...";
-			}
-			else
-			cout<<"\nfound at "<<k<<"th position......";
-		break;
-		}	
-			}while(ch!=4);
-
-return 0;
-}
-void insert(student data[30],int chain[30],int flag[30],int size,student x)
-{
-	int start=x.pno%size;
-	if(flag[start]==0)
-	{
-		data[start]=x;
-		flag[start]=1;
-		return ;
-	}
-	else if(data[start].pno%size==x.pno%size)
-	{
-		while(chain[start]!=-1)
-		{
-			start=chain[start];
-		}
-		int cnt=0;
-		int j=start;
-		while(flag[j]!=0 && cnt<size)
-		{
-			j=(j+1)%size;
-			cnt++;
-		}
-		if(cnt==size )
-		{
-			cout<<"\nTable is full.....";
-		}
-		else
-		{
-			data[j]=x;
-			chain[start]=j;
-			flag[j]=1;
-		}
-	}
-	else
-	{	
-		int cnt=0;
-		int i=data[start].pno%size;
-		while(chain[i]!=start)
-			i=chain[i];
-		
-		int j=start;
-		while(flag[j]==1 && cnt<size)
-		{
-			j=(j+1)%size;
-			cnt++;
-		}
-		if(cnt==size)
-		cout<<"\nTable is full....";
-		
-		data[j]=data[start];
-		chain[i]=j;
-		chain[j]=chain[start];
-		flag[j]=1;
-		data[start]=x;
-		chain[start]=-1;
-	}
-}
-void displayH(student data[30],int chain[30],int flag[30])
-{
-	for(int i=0;i<size;i++)
-	{
-		if(flag[i]==1)
-		{
-			cout<<"\n"<<i<<"\t"<<data[i].pno<<"\t"<<data[i].name<<"\t"<<chain[i];
-		}
-		else
-		{
-			cout<<"\n"<<i<<"\t"<<"____"<<"\t "<<"................."<<"\t"<<chain[i];
-		}
-	}
+	glClearColor(0.0f,0.0f,0.0f,1.0f);
+	glMatrixMode (GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,0.1f,100.0f);
+	glMatrixMode (GL_MODELVIEW);
 }
 
+float ballX=-0.5f;
+float ballY=0.0f;
+float ballZ=0.0f;
 
-int search(int data[30],int chain[30],int flag[30],int size,int key)
+void Drawball(void)
 {
-	int start=key%size;
-	if(flag[start]==1 && data[start]==key)
-	{
-		return start;
-	}
-	else if(flag[start]==1 && data[start]%size==key%size)
-	{
-		while(chain[start]!=-1)
-		{
-			if(data[start]==key)
-			return start;
-			start=chain[start];
-		}
-		if(data[start]==key)
-		return start;
-	}
-	else
-	return -1;
+	glColor3f(0.0,1.0,0.0);
+	glTranslatef(ballX,ballY,ballZ);
+	glRotatef(ballX,ballX,ballY,ballZ);
+	glutWireSphere(0.3,20,20);
+	glTranslatef(ballX+1.5,ballY,ballZ);
+	glutWireSphere(0.3,20,20);
+
+}
+
+void DrawGLScene()
+{
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	glLoadIdentity();
+	glTranslatef(rtri,0.0f,-6.0f);
+	glBegin(GL_POLYGON);
+	glColor3f(1.0f,0.0f,0.0f);
+	glVertex3f(-1.0f,1.0f,0.0f);
+	glVertex3f(0.4f,1.0f,0.0f);
+	glVertex3f(1.0f,0.4f,0.0f);
+	glColor3f(0.0f,1.0f,0.0f);
+	glVertex3f(1.0f,0.0f,0.0f);
+	glColor3f(0.0f,0.0f,1.0f);
+	glVertex3f(-1.0f,0.0f,0.0f);
+	glEnd();
+
+	Drawball();
+	rtri+=0.005f;
+	if(rtri>2)
+	rtri=-2.0f;
+	glutSwapBuffers();
+}
+
+int main(int argc,char**argv)
+{
+	glutInit(&argc,argv);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA| GLUT_DEPTH);
+	glutInitWindowSize(650,650);
+	glutInitWindowPosition(0,0);
+	glutCreateWindow("Moving CAR");
+	glutDisplayFunc(DrawGLScene);
+	glutIdleFunc(DrawGLScene);
+	InitGL(650,650);
+	glutMainLoop();
+	return 0;
 }

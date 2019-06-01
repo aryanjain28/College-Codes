@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style type="text/css">
+		
+		div{
+			width: 30px;
+		}
+		
+		form{
+			position: absolute;
+			top: 30%;
+			left: 42%;
+			height: 40px;
+		}
+	</style>
+</head>
+
+<body>
+	<form action="second.jsp">
+	
+		<div><input type="text" size="7"></div>
+		<table>
+			<tr>
+				<td><input type="submit" value="7" onclick=""></td>
+				<td><input type="submit" value="8"></td>
+				<td><input type="submit" value="9"></td>
+			</tr>
+			
+			<tr>
+				<td><input type="submit" value="4"></td>
+				<td><input type="submit" value="5"></td>
+				<td><input type="submit" value="6"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="1"></td>
+				<td><input type="submit" value="2"></td>
+				<td><input type="submit" value="3"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="." size="7"></td>
+				<td><input type="submit" value="0"></td>
+				<td><input type="submit" value="="></td>
+			</tr>
+		</table>
+	
+	</form>
+</body>
+
+</html>
